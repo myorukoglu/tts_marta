@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p id="notice"><%= notice %></p>
+<div id="bus-map" class="map"></div>
+<%= javascript_tag do %>
+  var my_location = {
+    'latitude' : '<%= j @location.latitude.to_s %>',
+    'longitude': '<%= j @location.longitude.to_s %>',
+    'address': '<%= j @location.my_location %>' 
+  }
+  var buses = []
+  
+  <% @nearby_buses.each do |bus| %>
+    buses.push({
+      'latitude': '<%= j bus[:latitude] %>',
+      'longitude': '<%= j bus[:longitude] %>',
+      'address': '<%= j bus[:address] %>',
+      'title': '<%= j bus[:title] %>',
+      'image': '<%= j image_path("marta.png") %>'
+    })   
+   <% end %>
+<% end %>
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=REPLACE_ME">
+ </script>
+ 
